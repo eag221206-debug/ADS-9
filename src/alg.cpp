@@ -33,9 +33,10 @@ std::vector<Node*> PMTree::buildTree(std::vector<char> available) {
     return children;
 }
 
-void dfs(Node* node, std::vector<char>& current, std::vector<std::vector<char>>& result) {
+void dfs(Node* node, std::vector<char>& current,
+         std::vector<std::vector<char>>& result) {
     if (!node) return;
-    
+
     if (node->value != '\0') {
         current.push_back(node->value);
     }
@@ -87,17 +88,17 @@ std::vector<char> getPerm2(PMTree& tree, int num) {
     int n = current->children.size();
 
     while (!current->children.empty()) {
-        int fact = getFactorial(n - 1); 
-        int idx = k / fact; 
-        
-        if (idx >= current->children.size()) return {}; 
-        
+        int fact = getFactorial(n - 1);
+        int idx = k / fact;
+
+        if (idx >= current->children.size()) return {};
+
         current = current->children[idx];
         result.push_back(current->value);
-        
-        k = k % fact; 
+
+        k = k % fact;
         n--;
     }
-    
+
     return result;
 }
